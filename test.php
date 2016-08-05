@@ -8,7 +8,6 @@
   //選擇資料庫
   mysql_select_db("Service_deskHW3") or die("無法選擇資料庫");
 
-
 ?>
 <!DOCTYPE html>
 <html>
