@@ -17,8 +17,8 @@
   }
 
   if(isset($_POST['usr'])){//已輸入帳密並且按下確認，才會進入該if結構
-    $username=$_POST['usr'];
-    $password=$_POST['pwd'];
+    $login_username=$_POST['usr'];
+    $login_password=$_POST['pwd'];
     $servername='localhost';
     $usr='root';
     $pass='tommy522588';
@@ -37,9 +37,9 @@
     $data->bind_result($id,$username, $password);
     while ($data->fetch()){
        /* Use $username and $password */
-      if($row['username']==$username){
+      if($username==$login_username){
           $_SESSION['v']="yes";
-          $_SESSION['username']=$username;
+          $_SESSION['username']=$login_username;
           //我想要用session紀錄帳密，到下一頁使用
           header("location:board.php");
         }
