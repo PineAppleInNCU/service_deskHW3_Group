@@ -38,6 +38,9 @@
     while ($data->fetch()){
        /* Use $username and $password */
       if($username==$login_username){
+
+          echo "HELLO!";
+
           $_SESSION['v']="yes";
           $_SESSION['username']=$login_username;
           //我想要用session紀錄帳密，到下一頁使用
