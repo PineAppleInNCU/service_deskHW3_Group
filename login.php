@@ -34,7 +34,7 @@
 
     ///debuging
     //$result=$data->get_result();
-    $data->bind_result($username, $password);
+    $data->bind_result($id,$username, $password);
     while ($data->fetch()){
        /* Use $username and $password */
       if($row['username']==$username){
