@@ -1,5 +1,7 @@
 <?php
 
+  session_start();//開始啟用session，一定要擺在網頁最上方
+
   //一、連結資料庫
   //建立連線
   $link = mysql_connect("localhost", "root", "tommy522588");
@@ -7,6 +9,45 @@
   mysql_query("SET NAMES 'UTF-8'");
   //選擇資料庫
   mysql_select_db("Service_deskHW3") or die("無法選擇資料庫");
+
+  if(isset($_SESSION['v'])){
+    if($_SESSION['v']=="yes"){//session['v']=="yes"表示有登入，且帳密正確
+      header("location:php_newboard.php");
+    }
+  }
+
+  if(isset($_POST['usr'])){//已輸入帳密並且按下確認，才會進入該if結構
+    $username=$_POST['usr'];
+    $password=$_POST['pwd'];
+    $servername='localhost';
+    $usr='root';
+    $pass='tommy522588';
+    $dbname='admin';
+    $conn = new mysqli($servername, $usr, $pass, $dbname);
+    //建立連線
+    $data = $conn->prepare("select * from admin where username=? and password=? "); 
+    //Prepare語句，把可能會被SQL Injection的資料欄位值先以”?”代替
+    $data->bind_param("ss", $username, $password);
+    //把資料欄位值綁定到prepare 語句中
+    $data->execute(); //執行SQL指令
+    $result=$data->get_result();
+    //疑問，$data->execute()   與  $data=mysql_query........的$data變數的性質相同嗎?
+    //$data=mysql_query("select * from admin where username ='$username' and password='$password'");
+    while($row=$result->fetch_assoc()){
+        if($row['username']==$username){
+          $_SESSION['v']="yes";
+          $_SESSION['username']=$username;
+          //我想要用session紀錄帳密，到下一頁使用
+          header("location:board.php");
+        }
+        //else if($row['username']!=$username){
+        //  $_SESSION['v']="not";
+          //header("location:php_login.php?msg=error");//疑問，為什麼沒辦法跑到這行??
+      //}
+    }
+    header("location:login.php?msg=error");//若沒找到帳密，則顯示訊息
+  }
+
 
 ?>
 <!DOCTYPE html>
