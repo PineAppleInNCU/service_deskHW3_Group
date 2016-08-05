@@ -13,8 +13,8 @@
 
   if(isset($_POST['username'])){
 
-    mysql_query("insert into admin value('$username','$password','$email')  ");
-    header("location:login.php");
+    mysql_query("insert into admin value('$username','$password')  ");//let username and password store in database
+    header("location:login.php");//頁面跳轉
 
   }
 
