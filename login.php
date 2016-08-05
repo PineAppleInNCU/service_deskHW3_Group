@@ -32,12 +32,12 @@
     $data->execute(); //執行SQL指令
 
 
+    echo "in the first if";
     ///debuging
     //$result=$data->get_result();
     $data->bind_result($id,$username, $password);
-    printf("%s %s\n", $$username, $password);
     while ($data->fetch()){
-      printf("%s %s\n", $$username, $password);
+      printf(" %s %s\n", $$username, $password);
        /* Use $username and $password */
       if($username==$login_username){
 
