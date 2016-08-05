@@ -10,6 +10,10 @@ background>>後台
 
 establish_password>>創造帳密
 
+fix_message>>修改留言
+
+fix_reply_message>>修改回覆
+
 以後可能會新增~
 
 每次merge完後都要git pull一次
