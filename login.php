@@ -35,8 +35,7 @@
     ///debuging
     //$result=$data->get_result();
     $data->bind_result($username, $password);
-    while ($data->fetch())
-    {
+    while ($data->fetch()){
        /* Use $username and $password */
       if($row['username']==$username){
           $_SESSION['v']="yes";
@@ -50,7 +49,7 @@
       //}
 
     }
-   
+  }
 
 
     //疑問，$data->execute()   與  $data=mysql_query........的$data變數的性質相同嗎?
