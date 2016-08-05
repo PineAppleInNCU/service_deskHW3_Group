@@ -12,7 +12,7 @@
 
   if(isset($_SESSION['v'])){
     if($_SESSION['v']=="yes"){//session['v']=="yes"表示有登入，且帳密正確
-      header("location:php_newboard.php");
+      header("location:board.php");
     }
   }
 
