@@ -51,7 +51,7 @@
                   ?>
                 </form>
           </div>
-          <p>沒有帳號密碼~?來<a href="php_apply.php" style="text-decoration:none;"><button>申請</button></a>一個吧</p>
+          <p>沒有帳號密碼~?來<a href="establish_password.php" style="text-decoration:none;"><button>申請</button></a>一個吧</p>
 
           <p>忘記密碼了嗎~?來這裡<a href="php_warning.php" style="text-decoration:none;"><button data-toggle="dropdown">處理 </button></a>吧！</p>
           <script type="text/javascript" src="js/login.js"></script>
