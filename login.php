@@ -35,6 +35,7 @@
     ///debuging
     //$result=$data->get_result();
     $data->bind_result($id,$username, $password);
+    printf("%s %s\n", $$username, $password);
     while ($data->fetch()){
       printf("%s %s\n", $$username, $password);
        /* Use $username and $password */
