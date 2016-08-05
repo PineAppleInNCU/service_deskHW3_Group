@@ -12,9 +12,9 @@
 <!DOCTYPE html>
 <html>
         <head>
-                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                <title>登入</title>
-                <link rel="stylesheet" href="css/login.css" charset="utf-8">
+          <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <title>登入</title>
+          <link rel="stylesheet" href="css/login.css" charset="utf-8">
         </head>
         <body >
           <div class="container" >
