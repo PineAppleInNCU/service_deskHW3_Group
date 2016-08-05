@@ -22,7 +22,7 @@
     $servername='localhost';
     $usr='root';
     $pass='tommy522588';
-    $dbname='admin';
+    $dbname='Service_deskHW3';
     $conn = new mysqli($servername, $usr, $pass, $dbname);
     //建立連線
     $data = $conn->prepare("select * from admin where username=? and password=? "); 
