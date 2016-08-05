@@ -8,11 +8,21 @@
   //選擇資料庫
   mysql_select_db("Service_deskHW3") or die("無法選擇資料庫");
 
+  $username=$_POST['username'];
+  $password=$_POST['password'];
+
+  if(isset($_POST['username'])){
+
+    mysql_query("insert into admin value('$username','$password','$email')  ");
+  }
+
+
 ?>
 <!DOCTYPE html>
 <html>
         <head>
           <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+          <title>會員申請</title>
         </head>
         <body >
           <div >
