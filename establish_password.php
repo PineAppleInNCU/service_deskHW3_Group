@@ -14,6 +14,8 @@
   if(isset($_POST['username'])){
 
     mysql_query("insert into admin value('$username','$password','$email')  ");
+    header("location:login.php");
+
   }
 
 
