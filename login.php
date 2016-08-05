@@ -30,10 +30,32 @@
     $data->bind_param("ss", $username, $password);
     //把資料欄位值綁定到prepare 語句中
     $data->execute(); //執行SQL指令
-    $result=$data->get_result();
+
+
+    ///debuging
+    //$result=$data->get_result();
+    $data->bind_result($username, $password);
+    while ($data->fetch())
+    {
+       /* Use $username and $password */
+      if($row['username']==$username){
+          $_SESSION['v']="yes";
+          $_SESSION['username']=$username;
+          //我想要用session紀錄帳密，到下一頁使用
+          header("location:board.php");
+        }
+        //else if($row['username']!=$username){
+        //  $_SESSION['v']="not";
+          //header("location:php_login.php?msg=error");//疑問，為什麼沒辦法跑到這行??
+      //}
+
+    }
+   
+
+
     //疑問，$data->execute()   與  $data=mysql_query........的$data變數的性質相同嗎?
     //$data=mysql_query("select * from admin where username ='$username' and password='$password'");
-    while($row=$result->fetch_assoc()){
+    /*while($row=$result->fetch_assoc()){
         if($row['username']==$username){
           $_SESSION['v']="yes";
           $_SESSION['username']=$username;
@@ -46,8 +68,9 @@
       //}
     }
     header("location:login.php?msg=error");//若沒找到帳密，則顯示訊息
-  }
+  }*/
 
+   //debuging
 
 ?>
 <!DOCTYPE html>
