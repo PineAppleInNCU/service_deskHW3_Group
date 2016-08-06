@@ -1,4 +1,6 @@
 <?php
+  session_start();//重要，沒有這行的話，session不會記錄上一個頁面的session給這個頁面
+
 
   //一、連結資料庫
   //建立連線
@@ -12,9 +14,11 @@
   {
     if($_GET['msg']=="logout")
     {
-      echo "logout!!";
-      $_SESSION['v']='';//點下logout鈕，將會把session變成空值
-      header("location:login.php");
+       echo $_SESSION['v'];
+       $_SESSION['v']='logout!';//點下logout鈕，將會把session變成空值
+       echo $_SESSION['v'];
+       header("location:login.php");
+     
     }
   }
 
