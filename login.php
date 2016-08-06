@@ -97,7 +97,7 @@
                   <p>Password:</p><input class="input" input type="password" name="pwd" type="text" id="pwd" placeholder="Enter password">
                 </div>
                 <div class="customerlogin">
-                    <a href="php_newboard.php" style="text-decoration:none;color: #3D59AB;font-family: Verdana, sans-serif;">訪客入口<?php echo "</br>"?><span style="font-weight: bold;
+                    <a href="board.php" style="text-decoration:none;color: #3D59AB;font-family: Verdana, sans-serif;">訪客入口<?php echo "</br>"?><span style="font-weight: bold;
             font-size: 18px;
             color: #ffffff;">請點擊這裡</span></a>
                 </div>
