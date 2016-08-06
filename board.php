@@ -12,7 +12,9 @@
   {
     if($_GET['msg']=="logout")
     {
+      echo "logout!!";
       $_SESSION['v']='';//點下logout鈕，將會把session變成空值
+      header("location:login.php");
     }
   }
 
