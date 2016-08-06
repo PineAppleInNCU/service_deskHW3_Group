@@ -28,7 +28,7 @@
                         echo "Hello world!";
                 ?>
 
-                <button><a href="board.php?msg=logout"></button>
+                <a href="board.php?msg=logout"><button>登出</button></a>
 
         </body>
 </html>
