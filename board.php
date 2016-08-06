@@ -8,6 +8,15 @@
   //選擇資料庫
   mysql_select_db("Service_deskHW3") or die("無法選擇資料庫");
 
+  if(isset($_GET['msg']))
+  {
+    if($_GET['msg']=="logout")
+    {
+      $_SESSION['v']='';//點下logout鈕，將會把session變成空值
+    }
+  }
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,5 +27,8 @@
                 <?php
                         echo "Hello world!";
                 ?>
+
+                <button><a href="board.php?msg=logout"></button>
+
         </body>
 </html>
