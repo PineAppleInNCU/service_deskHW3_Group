@@ -56,7 +56,6 @@
 
     }
   }
-  echo $_SESSION['username'];
 
 
     //疑問，$data->execute()   與  $data=mysql_query........的$data變數的性質相同嗎?
