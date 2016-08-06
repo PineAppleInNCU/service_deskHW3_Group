@@ -25,9 +25,8 @@
     $dbname='Service_deskHW3';
     $conn = new mysqli($servername, $usr, $pass, $dbname);
     //建立連線
-    $data = $conn->prepare("select * from admin where username=? and password=? "); 
+    $data = $conn->prepare("SELECT * FROM admin "); 
     //Prepare語句，把可能會被SQL Injection的資料欄位值先以”?”代替
-    $data->bind_param("ss", $username, $password);
     //把資料欄位值綁定到prepare 語句中
     $data->execute(); //執行SQL指令
 
