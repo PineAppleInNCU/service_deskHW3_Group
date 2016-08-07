@@ -110,7 +110,7 @@
 			<?php if($_SESSION['v']=="yes" ){//登入才顯示此列 ?>
 				<tr> <!-- 回覆、刪除、修改欄位 -->
 					<td>			
-						<a href="php_newreply.php?replyID=''&guestID=<?php echo htmlentities($rs['guestID']) ?>">回覆</a><!-- 前往id為guestID的回覆頁面 -->			
+						<a href="reply.php?replyID=none&messageID=<?php echo htmlentities($rs['id']) ?>&msg=normal">回覆</a><!-- 前往id為guestID的回覆頁面 -->			
 					</td>
 					<td>
 						<?php if($_SESSION['v']!="yes"){?>
@@ -124,10 +124,12 @@
 					<td>
 						<?php if($_SESSION['v']!="yes"){?>
 							<a href="php_replyerror.php?msg='notlogin'">修改</a>
-						<?php }else if($guestName!=$rs['username']){ ?>
+						<?php }else if($username!=$rs['username']){ ?>
 							<a href="php_replyerror.php?msg=''">修改</a>
 						<?php }else{ ?>
-							<a href="php_fixpost.php?id=<?php echo htmlentities($rs['id']) ?>">修改</a>
+							<!--<a href="php_fixpost.php?id=<?php echo htmlentities($rs['id']) ?>">修改</a> -->
+							<a href="reply.php?replyID=none&messageID=<?php echo htmlentities($rs['id']) ?>&msg=fix_message">修改</a>
+
 						<?php } ?>			
 					</td>
 
@@ -153,21 +155,21 @@
 			<?php 
 					$result=mysql_query("select * from reply");
 					while($row_result=mysql_fetch_assoc($result)){//將留言內容從資料表{reply}抓出
-						if($row_result['id']==htmlentities($rs['id'])){
+						if($row_result['messageId']==htmlentities($rs['id'])){
 							//if($rs['replyer']!=''){ 
 			?>
 				<tr>
-					<td colspan="3" ><?php echo  $row_result['replyer'] ?>回覆</td><?php //變成假如沒有人回應，就隱藏此欄位  可以用資料儲存replyer的欄位  if replyer 存在 再顯示此欄位?>
+					<td colspan="3" ><?php echo  $row_result['username'] ?>回覆</td><?php //變成假如沒有人回應，就隱藏此欄位  可以用資料儲存replyer的欄位  if replyer 存在 再顯示此欄位?>
 				</tr>
 				<tr>
 					<td>回覆時刻</td>
 					<td colspan="2"  width="500">
-						<?php echo $row_result['guestReplyTime'];?>
+						<?php echo $row_result['replyTime'];?>
 					</td>
 				</tr>
 				<tr>
 					<td colspan="3"	width="500">
-						<p style="word-break:break-all"><?php echo htmlentities($row_result['guestReply']);?></p>
+						<p style="word-break:break-all"><?php echo htmlentities($row_result['content']);?></p>
 					</td>
 				</tr>
 
@@ -176,10 +178,10 @@
 					<td colspan="3"	width="500">
 					<?php if($_SESSION['v']!="yes"){?>
 						<a href="php_replyerror.php?msg=''">修改回覆</a>				
-					<?php }else if($guestName!=$row_result['replyer']){ ?>
+					<?php }else if($username!=$row_result['username']){ ?>
 						<a href="php_replyerror.php?msg=''">修改回覆</a>
 					<?php }else{ ?>
-						<a href="php_newreply.php?replyID=<?php echo $row_result['replyID'] ?>&guestID=<?php echo htmlentities($rs['guestID']) ?> ">修改回覆</a>
+						<a href="reply.php?replyID=<?php echo $row_result['id'] ?>&messageID=<?php echo htmlentities($rs['id']) ?>&msg=fix ">修改回覆</a>
 					</td>		
 				</tr>
 					<?php } ?>
@@ -222,6 +224,13 @@
 
 <!-- 接下來做留言功能，先做好資料表，再寫php  done -->
 <!-- 這部分做好後，開始做回覆頁面，更改密碼頁面 刪除留言-->
+	<!-- 刪除留言  done-->
+	<!-- 新增回覆  done -->
+	<!-- 更改回覆  done -->
+	<!-- 更改留言  與更改回覆用同一個file，用msg的訊息區別用途     -->
+	<!-- 刪除回覆       -->
+
+	
 <!-- 帳密部分還沒有防各種注入 -->
 
 <!-- 留言板裡的字，不知道為什麼是白色的  done>>use css >>color:black;-->
