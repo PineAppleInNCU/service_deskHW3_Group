@@ -11,7 +11,17 @@
   mysql_select_db("Service_deskHW3") or die("無法選擇資料庫");
 
 
-
+//取得使用者名稱
+  $username=$_SESSION['username'];
+//取得使用者名稱//
+//將留言放到資料庫裡
+  if(isset($_POST['guestContent'])){
+	$guestContent=$_POST['guestContent'];//將由留言者的回覆儲存到guestContent裡
+	$guestTime=date("Y:m:d H:i:s",time()+28800);
+	$newData=mysql_query("insert into guest value('','$username','$guestTime','$guestContent')  ");//將資料存入guest的資料表裡
+	header("location:board.php");
+  }
+//將留言放到資料庫裡
 //判斷有無登入
   if(isset($_SESSION['v'])){//若有登入，不做動作
 
@@ -42,7 +52,10 @@
 <!DOCTYPE html>
 <html>
         <head>
+		<title>留言板</title>
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<link rel="stylesheet" href="css/board.css" charset="utf-8">
+
         </head>
         <body class="bg-info">
           <?php
@@ -52,15 +65,15 @@
           <?php if(isset($_SESSION['v']))if($_SESSION['v']=="yes"){ ?>
 
             <div><?php //確定是使用者，才顯示這一個區塊?>
-              <P><font><?php echo "$guestName" ?></font>來說點甚麼吧</P>
+              <P><font><?php echo "$username" ?></font>來說點甚麼吧</P>
               <div>
                 <form id="form1" name="form1" method="post" action="">
-                  <textarea class="post" style="width:600px;color:white" rows="8" id="guestContent" name="guestContent"></textarea>
+                  <textarea class="post" rows="8" id="guestContent" name="guestContent"></textarea>
                   <?php echo "</br>"?>
                   <input type="submit" name="button" id="button" value="確認" />
                 </form>
                 <div>
-                  <a href="php_newboard.php?msg=logout" style="text-decoration:none;color: #3D59AB;font-family: Verdana, sans-serif;"><span style="font-weight: bold;font-size: 18px;color: #ffffff;">登出</span></a>
+                  <a href="board.php?msg=logout"><span>登出</span></a>
                 </div>
                 <div >
                   <a href="php_adminfix.php"><span>帳密修改</span></a>
@@ -191,5 +204,6 @@
         </body>
 </html>
 
-<!-- 接下來做留言功能，先做好資料表，再寫php  -->
-<!-- 這部分做好後，開始做回覆頁面，更改密碼頁面 -->
+<!-- 接下來做留言功能，先做好資料表，再寫php  done -->
+<!-- 這部分做好後，開始做回覆頁面，更改密碼頁面 刪除留言-->
+<!-- 帳密部分還沒有防各種注入 -->
