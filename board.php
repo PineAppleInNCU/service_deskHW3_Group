@@ -31,19 +31,38 @@
 
   }
 //判斷有無登入//
-//判斷是沒有點擊登出按鈕
+
+
+//使用msg
   if(isset($_GET['msg']))
   {
     if($_GET['msg']=="logout")
     {
 
+       //判斷是沒有點擊登出按鈕
        echo $_SESSION['v'];
        $_SESSION['v']='logout!';//點下logout鈕，將會把session變成空值
        echo $_SESSION['v'];
-       header("location:login.php");     
+       header("location:login.php");    
+       //判斷是沒有點擊登出按鈕//
+    }
+    else if($_GET['msg']=="delete"){
+	//刪除非自己的留言，會導致錯誤
+	if($_GET['msg_2']=="not_the_same_user"){
+		echo "not the same user!";
+	}
+	//刪除非自己的留言，會導致錯誤//
+	//刪除留言
+	else{
+		$id=$_GET['id'];
+		mysql_query("DELETE FROM guest WHERE id='$id'");
+		header("location:board.php");
+	}
+	//刪除留言
     }
   }
-//判斷是沒有點擊登出按鈕//
+//使用msg//
+
 //抓取資料
   $data=mysql_query("select * from guest order by guestTime desc");//從資料庫裡抓資料
 //抓取資料//
@@ -58,9 +77,6 @@
 
         </head>
         <body class="bg-info">
-          <?php
-            echo "Hello world!";
-          ?>
           <!-- 輸入留言 -->
           <?php if(isset($_SESSION['v']))if($_SESSION['v']=="yes"){ ?>
 
@@ -99,10 +115,10 @@
 					<td>
 						<?php if($_SESSION['v']!="yes"){?>
 							<a href="php_replyerror.php?msg='notlogin'">刪除</a>		
-						<?php }else if($guestName!=$rs['username']){ ?>
-							<a href="php_replyerror.php?msg=''">刪除</a>
+						<?php }else if($username!=$rs['username']){ ?>
+							<a href="board.php?msg=delete&msg_2=not_the_same_user">刪除</a>
 						<?php }else{ ?>
-							<a href="php_postDelete.php?id=<?php echo htmlentities($rs['id']) ?>">刪除</a>
+							<a href="board.php?id=<?php echo htmlentities($rs['id'])?>&msg=delete">刪除</a>
 						<?php } ?>		
 					</td>
 					<td>
