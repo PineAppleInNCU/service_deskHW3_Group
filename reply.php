@@ -41,11 +41,15 @@
 		//fix message
 		else if($_GET['msg']=="fix_message"){
 			echo "TEST";
+			$data=mysql_query("SELECT * FROM guest WHERE id='$id'");//取得messgae的內容
+			$record=mysql_fetch_assoc($data);//將取得的資料表的第一列的資料匯入record
+			if(isset($_POST['guestReply'])){
+				$guestReply=$_POST['guestReply'];
+				$time=date("Y:m:d H:i:s",time()+28800);
+				mysql_query("UPDATE guest SET content='$guestReply',replyTime='$time' WHERE id='$replyID'  ") or die(mysql_error());//將資料存入reply的資料表    做到這裡!!!!!!!!!!!!!!!
+
 		}
-		//fix message//
-
-
-		
+		//fix message//	
 	}
 ?>
 
