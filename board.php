@@ -120,7 +120,7 @@
                   <a href="board.php?msg=logout"><span>登出</span></a>
                 </div>
                 <div >
-                  <a href="php_adminfix.php"><span>帳密修改</span></a>
+                  <a href="php_adminfix.php"><span>修改密碼</span></a>
                 </div>
               </div>
             </div>
@@ -257,10 +257,11 @@
 	<!-- 更改回覆  done -->
 	<!-- 更改留言  與更改回覆用同一個file，用msg的訊息區別用途   done  -->
 	<!-- 刪除回覆       done -->
-
+	<!-- 密碼修改   -->
 
 	
 <!-- 帳密部分還沒有防各種注入 -->
 <!-- 此網頁撰寫方式很容易被有心人士刪除留言，只要知道url的構造，就很容易假造刪除留言 -->
+<!--  -->
 
 <!-- 留言板裡的字，不知道為什麼是白色的  done>>use css >>color:black;-->
