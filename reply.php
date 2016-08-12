@@ -1,4 +1,5 @@
 <?php
+
 	session_start();
 	if($_SESSION['v']!="yes"){
 		header("location:php_board_3.php");
@@ -46,11 +47,13 @@
 			if(isset($_POST['guestReply'])){
 				$guestReply=$_POST['guestReply'];
 				$time=date("Y:m:d H:i:s",time()+28800);
-				mysql_query("UPDATE guest SET content='$guestReply',replyTime='$time' WHERE id='$replyID'  ") or die(mysql_error());//將資料存入reply的資料表    做到這裡!!!!!!!!!!!!!!!
-
-		}
+				mysql_query("UPDATE guest SET content='$guestReply',guestTime='$time'  WHERE id='$id'  ") or die(mysql_error());//將資料存入reply的資料表    做到這裡!!!!!!!!!!!!!!!*/
+				header("location:board.php");
+			}
+		}	
 		//fix message//	
 	}
+
 ?>
 
 
@@ -66,10 +69,11 @@
 					</thead>
 					<tr>
 						<td>username：</td>
-						<td><?php  echo $username;  ?></td>
+						<td> <?php   echo  $username;   ?> </td>
 					</tr>
 
-						<td>狀態：<?php 
+						<td>狀態：
+							<?php 
 								if($_GET['msg']=="normal"){
 									echo "回覆";
 								}
@@ -92,6 +96,7 @@
 					<form id="form1" name="form1" method="post" action="">
 						<label for="guestReply">回覆內容</label>
 						<textarea style="width:600px" rows="8" id="guestReply" name="guestReply">
+
 							<?php 
 								if($_GET['msg']=="normal"){
 									
@@ -99,8 +104,12 @@
 								else if($_GET['msg']=="fix"){
 									echo $record['content'];
 								}
+								else if($_GET['msg']=="fix_message"){
+									echo $record['content'];
+								}
 								
 							  ?>
+
 						</textarea>
 						<input type="submit" name="button" id="button" value="回覆" />
 					</form>
@@ -108,4 +117,3 @@
 			</div>
 	</body>
 </html>
-<!-- 寫到修改回覆 的 資料庫操作(update) -->

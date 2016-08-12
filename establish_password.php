@@ -10,11 +10,45 @@
 
   $username=$_POST['username'];
   $password=$_POST['password'];
+  $email=$_POST['email'];
 
   if(isset($_POST['username'])){
+    		if(strpos($email,"@")){
+			$data=mysql_query("select * from admin where username ='$username'");
+			if(mysql_num_rows($data)>=1){				
+				echo "<script>alert('已經有人使用過該帳號!');</script>";
+			}
 
-    mysql_query("insert into admin value('','$username','$password')  ");//let username and password store in database
-    header("location:login.php");//頁面跳轉
+			else{
+				$data=mysql_query("select * from admin where email='$email'");
+				if(mysql_num_rows($data)>=1){
+					echo "<script>alert('已經有人使用過該電子信箱!');</script>";
+				}
+
+				else{
+
+					if($username=='' || $password==''){			
+						echo "<script>alert('帳號密碼欄位空白!');</script>";
+					}
+					else{
+							if(!preg_match("/^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i",$username) || !preg_match("/^(([a-z]+[0-9]+)|([0-9]+[a-z]+))[a-z0-9]*$/i",$password)){
+							
+								echo "<script>alert('帳號密碼格式錯誤!，需要英文數字混雜!');</script>";
+							}
+							else{	
+								mysql_query("insert into admin value('','$username','$password','$email')  ");
+								header("location:login.php");
+							}
+			   	  	}
+		   	  	}
+	   	  	}
+	 	}
+	 	else{
+			echo "<script>alert('電子信箱格式錯誤!');</script>";
+		}
+
+  //  mysql_query("insert into admin value('','$username','$password','$email')  ");//let username and password store in database
+   // header("location:login.php");//頁面跳轉
 
   }
 

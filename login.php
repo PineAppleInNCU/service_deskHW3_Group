@@ -35,7 +35,7 @@
     echo "in the first if";
     ///debuging
     //$result=$data->get_result();
-    $data->bind_result($id,$username, $password);
+    $data->bind_result($id,$username, $password,$email);
     while ($data->fetch()){
       echo "in the first while";
       printf(" %s %s\n", $username, $password);

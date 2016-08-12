@@ -49,7 +49,7 @@
     else if($_GET['msg']=="delete"){
 	//刪除非自己的留言，會導致錯誤
 	if($_GET['msg_2']=="not_the_same_user"){
-		echo "not the same user!";
+		echo "<script>alert('留言者才能刪除該留言');</script>";
 	}
 	//刪除非自己的留言，會導致錯誤//
 	//刪除留言
@@ -60,6 +60,34 @@
 	}
 	//刪除留言
     }
+    //修改留言
+    else if($_GET['msg']=="fix_message"){
+	if($_GET['msg_2']=="not_the_same_user"){
+		echo "<script>alert('留言者才能修改該留言');</script>";
+	}
+    }
+    //修改留言//
+    //修改回覆
+    else if($_GET['msg']=="fix_reply"){
+	if($_GET['msg_2']=="not_the_same_user"){
+		echo "<script>alert('回覆者才能修改該回覆');</script>";
+	}
+	
+    }
+    //修改回覆//
+    //刪除回覆
+    else if($_GET['msg']=="delete_reply"){
+	if($_GET['msg_2']=="not_the_same_user"){
+		echo "<script>alert('回覆者才能刪除該回覆');</script>";
+	}
+	else{
+		$id=$_GET['replyID'];
+		mysql_query("DELETE FROM reply WHERE id='$id'");
+		header("location:board.php");
+	}
+    }
+    //刪除回覆//
+    
   }
 //使用msg//
 
@@ -114,7 +142,7 @@
 					</td>
 					<td>
 						<?php if($_SESSION['v']!="yes"){?>
-							<a href="php_replyerror.php?msg='notlogin'">刪除</a>		
+							<a href="board.php?msg='dont_delete'">刪除</a>
 						<?php }else if($username!=$rs['username']){ ?>
 							<a href="board.php?msg=delete&msg_2=not_the_same_user">刪除</a>
 						<?php }else{ ?>
@@ -123,12 +151,12 @@
 					</td>
 					<td>
 						<?php if($_SESSION['v']!="yes"){?>
-							<a href="php_replyerror.php?msg='notlogin'">修改</a>
+							<a href="php_replyerror.php?msg='notlogin'">修改留言</a>
 						<?php }else if($username!=$rs['username']){ ?>
-							<a href="php_replyerror.php?msg=''">修改</a>
+							<a href="board.php?msg=fix_message&msg_2=not_the_same_user">修改留言</a>
 						<?php }else{ ?>
 							<!--<a href="php_fixpost.php?id=<?php echo htmlentities($rs['id']) ?>">修改</a> -->
-							<a href="reply.php?replyID=none&messageID=<?php echo htmlentities($rs['id']) ?>&msg=fix_message">修改</a>
+							<a href="reply.php?replyID=none&messageID=<?php echo htmlentities($rs['id']) ?>&msg=fix_message">修改留言</a>
 
 						<?php } ?>			
 					</td>
@@ -179,7 +207,7 @@
 					<?php if($_SESSION['v']!="yes"){?>
 						<a href="php_replyerror.php?msg=''">修改回覆</a>				
 					<?php }else if($username!=$row_result['username']){ ?>
-						<a href="php_replyerror.php?msg=''">修改回覆</a>
+						<a href="board.php?msg=fix_reply&msg_2=not_the_same_user">修改回覆</a>
 					<?php }else{ ?>
 						<a href="reply.php?replyID=<?php echo $row_result['id'] ?>&messageID=<?php echo htmlentities($rs['id']) ?>&msg=fix ">修改回覆</a>
 					</td>		
@@ -191,11 +219,11 @@
 								<?php if($_SESSION['v']!="yes"){?>
 										<a href="php_replyerror.php?msg=''">刪除回覆</a>
 									
-								<?php }else if($guestName!=$row_result['replyer']){ ?>										
-										<a href="php_replyerror.php?msg=''">刪除回覆</a>
+								<?php }else if($username!=$row_result['username']){ ?>										
+										<a href="board.php?msg=delete_reply&msg_2=not_the_same_user">刪除回覆</a>
 
 								<?php }else{ ?>
-										<a href="php_replyDelete.php?replyID=<?php echo $row_result['replyID'] ?>&guestID=<?php echo htmlentities($rs['guestID']) ?> ">刪除回覆</a>
+										<a href="board.php?replyID=<?php echo $row_result['id'] ?>&guestID=<?php echo htmlentities($rs['id']) ?>&msg=delete_reply ">刪除回覆</a>
 								<?php } ?>
 
 								<?php }
@@ -227,10 +255,12 @@
 	<!-- 刪除留言  done-->
 	<!-- 新增回覆  done -->
 	<!-- 更改回覆  done -->
-	<!-- 更改留言  與更改回覆用同一個file，用msg的訊息區別用途     -->
-	<!-- 刪除回覆       -->
+	<!-- 更改留言  與更改回覆用同一個file，用msg的訊息區別用途   done  -->
+	<!-- 刪除回覆       done -->
+
 
 	
 <!-- 帳密部分還沒有防各種注入 -->
+<!-- 此網頁撰寫方式很容易被有心人士刪除留言，只要知道url的構造，就很容易假造刪除留言 -->
 
 <!-- 留言板裡的字，不知道為什麼是白色的  done>>use css >>color:black;-->
