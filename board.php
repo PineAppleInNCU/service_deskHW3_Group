@@ -120,7 +120,7 @@
                   <a href="board.php?msg=logout"><span>登出</span></a>
                 </div>
                 <div >
-                  <a href="php_adminfix.php"><span>修改密碼</span></a>
+                  <a href="admin_fix.php"><span>修改密碼</span></a>
                 </div>
               </div>
             </div>

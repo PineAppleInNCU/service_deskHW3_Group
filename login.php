@@ -32,29 +32,29 @@
     $data->execute(); //執行SQL指令
 
 
-    echo "in the first if";
+    
     ///debuging
     //$result=$data->get_result();
     $data->bind_result($id,$username, $password,$email);
     while ($data->fetch()){
-      echo "in the first while";
-      printf(" %s %s\n", $username, $password);
        /* Use $username and $password */
       if($username==$login_username){
+	if($password==$login_password){	
+          	echo "HELLO!";
 
-          echo "HELLO!";
-
-          $_SESSION['v']="yes";
-          $_SESSION['username']=$login_username;
-          //我想要用session紀錄帳密，到下一頁使用
-          header("location:board.php");
-        }
+          	$_SESSION['v']="yes";
+          	$_SESSION['username']=$login_username;
+          	//我想要用session紀錄帳密，到下一頁使用
+          	header("location:board.php");
+         }
+       }
         //else if($row['username']!=$username){
         //  $_SESSION['v']="not";
           //header("location:php_login.php?msg=error");//疑問，為什麼沒辦法跑到這行??
       //}
 
     }
+    echo "<script>alert('帳號密碼輸入錯誤!');</script>";
   }
 
 
