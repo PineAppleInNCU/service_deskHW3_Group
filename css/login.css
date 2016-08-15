@@ -1,8 +1,15 @@
 div{
 
-	color:red;
+	color:#707038;
 
 }
 body{
-	background-color: #DFDDDD;
+	background-color:#95CACA;
+}
+#input,#btn{
+	border-radius: 30%;
+}
+p{
+	font-family: cursive;
+	padding: 10px 10px;
 }
