@@ -3,3 +3,17 @@
 	width:50%;
 	resize:none;
 }
+body{
+	background-color: #95CACA;
+}
+div{
+
+	color:#707038;
+
+}
+p{
+	font-family: Verdana, sans-serif;
+}
+#button{
+	border-radius: 30%;
+}

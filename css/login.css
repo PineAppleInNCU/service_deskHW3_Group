@@ -4,12 +4,16 @@ div{
 
 }
 body{
-	background-color:#95CACA;
+	background-color: #95CACA;
 }
-#input,#btn{
+.input{
+	border-radius: 30%;
+}
+.btn{
 	border-radius: 30%;
 }
 p{
 	font-family: cursive;
+	color: #707038;
 	padding: 10px 10px;
 }
